@@ -1,0 +1,81 @@
+<!-- Creado por adam24_exe -->
+
+<html>
+	<head>
+	<title>M365 calc</title>
+	<style>
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		input[type=text], select {
+			padding: 12px 20px;
+			margin: 0px 0px 22px 0px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			text-align: center;
+		}
+		div {
+			border-radius: 10px;
+			background-color: #f2f2f2;
+			padding: 20px;
+			margin: 0px 0px 22px 0px;
+		}
+	</style>
+	</head>
+	<body>
+		<script>
+		var d_const = 51575;
+		var d_nBatt = 17000; // E3
+		var d_nPhase = 32000; // D3
+		var d_eBatt = 7000; // D3
+		var d_ePhase = 17000;
+			function calculate() {
+				var constant = document.getElementById('constant').value; 
+				var result = document.getElementById('result'); 
+				var nBatt = (d_nBatt * d_const) / constant;
+				var nMaxWatt = (nBatt * 36) / 1000;
+				var nPhase = (d_nPhase * d_const) / constant;
+				var eBatt = (d_eBatt * d_const) / constant;
+				var eMaxWatt = (eBatt * 36) / 1000;
+				var ePhase = (d_ePhase * d_const) / constant;
+				document.getElementById("R_nBatt").innerHTML = Math.round(nBatt);
+				document.getElementById("R_nMaxWatt").innerHTML = Math.round(nMaxWatt);
+				document.getElementById("R_nPhase").innerHTML = Math.round(nPhase);
+				document.getElementById("R_eBatt").innerHTML = Math.round(eBatt);
+				document.getElementById("R_eMaxWatt").innerHTML = Math.round(eMaxWatt);
+				document.getElementById("R_ePhase").innerHTML = Math.round(ePhase);
+				if (constant == "") {
+					document.getElementById("R_nBatt").innerHTML = "-";
+					document.getElementById("R_nMaxWatt").innerHTML = "-";
+					document.getElementById("R_nPhase").innerHTML = "-";
+					document.getElementById("R_eBatt").innerHTML = "-";
+					document.getElementById("R_eMaxWatt").innerHTML = "-";
+					document.getElementById("R_ePhase").innerHTML = "-";
+				}
+				if (constant < 38000) {
+					document.getElementById("constant").style.backgroundColor="#F6CECE";
+				}
+				else {
+					document.getElementById("constant").style.backgroundColor="#FFFFFF";
+				}
+			}
+		</script>
+		<center>
+			<p>Power constant (Modelo normal):</p>
+			<input id="constant" type="text" oninput="calculate();" />
+			<div>
+				<p>Normal max watt: <p/><b id="R_nMaxWatt">-</b>
+				<p>Normal phase: <p/><b id="R_nPhase">-</b>
+				<p>Normal battery: <p/><b id="R_nBatt">-</b>
+				<p>ECO max Watt: <p/><b id="R_eMaxWatt">-</b>
+				<p>ECO phase: <p/><b id="R_ePhase">-</b>
+				<p>ECO battery: <p/><b id="R_eBatt">-</b><center/>
+			</div>
+			<div style="padding: 10px">
+				<a href="./pro.html">Calculadora para modelo PRO</a>
+			</div>
+		</center>
+	</body>
+</html>
